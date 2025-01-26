@@ -57,7 +57,8 @@ function M.setup(opts)
         error(string.format("Missing API key: Please set the %s environment variable", M.config.api_key_name))
     end
 
-    vim.keymap.set("n", M.config.chat_keymap, M.open_chat, {noremap = true, silent=false})
+    vim.api.nvim_create_user_command('Gobllm', M.open_chat, {})
+    vim.keymap.set("n", M.config.chat_keymap, ":Gobllm<CR>", {noremap = true, silent=false})
     vim.keymap.set("v", M.config.replace_keymap, M.replace, {noremap = true, silent=false})
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "gobllm",
